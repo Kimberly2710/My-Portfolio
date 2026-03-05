@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<style>
+    .contact {
+        max-width: 600px;
+        margin: 60px auto;
+        padding: 0 30px;
+    }
+    .contact h2 {
+        font-size: 32px;
+        color: #1a1a2e;
+        margin-bottom: 10px;
+    }
+    .contact p {
+        color: #555;
+        margin-bottom: 30px;
+    }
+    .contact input, .contact textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+    .contact button {
+        background: #e94560;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .contact button:hover { background: #c73652; }
+</style>
+
+<div class="contact">
+    <h2>Contact Me</h2>
+    <p>Have a question or want to work together? Send me a message!</p>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</div>
+
+{% endblock %}
