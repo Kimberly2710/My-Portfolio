@@ -1,38 +1,48 @@
 # Email Configuration Setup
 
-## Development Mode (Current Setup)
-The portfolio is currently configured to use Django's console email backend, which prints emails to the console instead of actually sending them. This is perfect for testing.
+## Current Configuration
+The portfolio is configured to send emails through Gmail using your email: vinlawz07@gmail.com
 
-## Production Setup
-To actually send emails in production, you'll need to:
+## Setup Steps for Gmail
 
-1. Update EMAIL_BACKEND in settings.py:
-   ```python
-   EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-   ```
+### 1. Enable 2-Factor Authentication
+- Go to https://myaccount.google.com/security
+- Enable 2-Factor Authentication for your Gmail account
 
-2. Configure your email provider settings:
-   ```python
-   EMAIL_HOST = 'smtp.gmail.com'  # or your provider
-   EMAIL_PORT = 587
-   EMAIL_USE_TLS = True
-   EMAIL_HOST_USER = 'your-email@gmail.com'
-   EMAIL_HOST_PASSWORD = 'your-app-password'
-   ```
+### 2. Generate App Password
+- Go to https://myaccount.google.com/apppasswords
+- Select "Mail" for the app
+- Select "Other (Custom name)" and name it "Portfolio Contact"
+- Copy the 16-character password generated
 
-3. For Gmail, you'll need to:
-   - Enable 2-factor authentication
-   - Generate an app password
-   - Use the app password instead of your regular password
+### 3. Create .env File
+Create a `.env` file in the project root with:
+```
+SECRET_KEY=django-insecure-development-key-for-portfolio-only
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1,localhost
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=vinlawz07@gmail.com
+EMAIL_HOST_PASSWORD=your-16-character-app-password
+```
 
-## Testing the Contact Form
+### 4. Test the Contact Form
 1. Navigate to http://127.0.0.1:8000/contact/
 2. Fill out the form with test data
-3. Check the Django server console for the email output
-4. You should see the email content printed in the console
+3. You should receive an email in your Gmail inbox
+
+## Alternative: Console Mode (for testing)
+If you want to test without sending real emails, set:
+```
+EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+```
+This will print emails to the console instead.
 
 ## Email Validation
-The contact form now includes:
+The contact form includes:
 - Required field validation
 - Minimum length validation (name: 2 chars, message: 10 chars)
 - Proper error handling and user feedback
