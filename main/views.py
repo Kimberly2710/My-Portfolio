@@ -31,8 +31,8 @@ def contact(request):
             send_mail(
                 subject=f'Portfolio Contact from {name}',
                 message=f'From: {name}\nEmail: {email}\n\nMessage:\n{message}',
-                from_email=settings.EMAIL_HOST_USER,
-                recipient_list=[settings.EMAIL_HOST_USER],
+                from_email=settings.EMAIL_HOST_USER,           # Change to your email
+                recipient_list=[settings.EMAIL_HOST_USER],      # Change to recipient email
                 fail_silently=False,
             )
             messages.success(request, 'Your message has been sent successfully! You will receive a response shortly.')
