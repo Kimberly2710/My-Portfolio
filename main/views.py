@@ -10,20 +10,34 @@ def home(request):
 def contact(request):
 
     if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
+        name = request.POST.get('name', '').strip()
+        email = request.POST.get('email', '').strip()
+        message = request.POST.get('message', '').strip()
+        
+        # Basic validation
+        if not name or not email or not message:
+            messages.error(request, 'All fields are required.')
+            return render(request, 'main/contact.html')
+        
+        if len(name) < 2:
+            messages.error(request, 'Name must be at least 2 characters long.')
+            return render(request, 'main/contact.html')
+        
+        if len(message) < 10:
+            messages.error(request, 'Message must be at least 10 characters long.')
+            return render(request, 'main/contact.html')
 
         try:
             send_mail(
                 subject=f'Portfolio Contact from {name}',
                 message=f'From: {name}\nEmail: {email}\n\nMessage:\n{message}',
-                from_email=settings.EMAIL_HOST_USER,
-                recipient_list=[settings.EMAIL_HOST_USER],
+                from_email=settings.EMAIL_HOST_USER,           # Change to your email
+                recipient_list=[settings.EMAIL_HOST_USER],      # Change to recipient email
+                fail_silently=False,
             )
             messages.success(request, 'Your message has been sent successfully! You will receive a response shortly.')
         except Exception as e:
             print(f'EMAIL ERROR: {e}')
-            messages.error(request, f'Error: {e}')
+            messages.error(request, f'Error sending message: {e}. Please try again later.')
 
     return render(request, 'main/contact.html')
