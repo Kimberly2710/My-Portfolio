@@ -1,7 +1,9 @@
 # My-Portfolio
 # 👩‍💻 Kimberly Jahenda — Personal Portfolio
 
-Welcome to my personal portfolio website! I'm a passionate **Frontend Developer & Content Creator** based in Mombasa, Kenya, with a love for building clean, functional, and visually appealing web experiences.
+## 🙋‍♀️ About Me
+
+Hi, I'm Kimberly! I'm a **Frontend Developer, Content Creator & Entrepreneur** based in NMombasa, Kenya. I create websites that are not just functional but enjoyable to use. I combine my skills in frontend development and content creation to build experiences that connect with people. I am also passionate about building businesses and turning ideas into reality.
 
 🌐 **Live Site:** [kimmie.pythonanywhere.com](https://kimmie.pythonanywhere.com)
 
