@@ -209,6 +209,16 @@
     .about-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(97,12,39,0.1); }
     .about-card .icon { font-size: 28px; margin-bottom: 10px; }
     .about-card .label { font-size: 13px; color: var(--wine); font-weight: 500; }
+    a.about-card {
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+a.about-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(97,12,39,0.15);
+}
 
     /* ── SKILLS ── */
     .skills {
@@ -278,8 +288,64 @@
     .delay-3 { animation-delay: 0.4s; }
     .delay-4 { animation-delay: 0.55s; }
     .delay-5 { animation-delay: 0.7s; }
-</style>
 
+    /* ── ACCESSIBILITY PANEL ── */
+.a11y-toggle {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--wine); color: white; border: none;
+    font-size: 20px; cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+}
+.a11y-toggle:hover { transform: scale(1.1); }
+.a11y-panel {
+    position: fixed; bottom: 80px; right: 24px; z-index: 9999;
+    background: white; border-radius: 16px;
+    padding: 20px; width: 220px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    border: 1px solid rgba(97,12,39,0.1);
+    display: none;
+}
+.a11y-panel.open { display: block; }
+.a11y-panel h4 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--wine); font-size: 16px;
+    margin-bottom: 16px;
+}
+.a11y-row { margin-bottom: 14px; }
+.a11y-row label {
+    font-size: 12px; color: var(--muted);
+    display: block; margin-bottom: 6px; letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.a11y-row input[type=range] { width: 100%; accent-color: var(--wine); }
+.a11y-reset {
+    width: 100%; padding: 8px;
+    background: var(--soft-pink); border: 1px solid rgba(97,12,39,0.15);
+    border-radius: 8px; color: var(--wine);
+    font-size: 12px; cursor: pointer; margin-top: 4px;
+}
+.a11y-reset:hover { background: var(--blush); }
+</style>
+<!-- ACCESSIBILITY PANEL -->
+<button class="a11y-toggle" onclick="toggleA11y()" title="Accessibility options">♿</button>
+<div class="a11y-panel" id="a11yPanel">
+    <h4>Accessibility</h4>
+    <div class="a11y-row">
+        <label>🔆 Brightness</label>
+        <input type="range" min="50" max="150" value="100" oninput="setBrightness(this.value)">
+    </div>
+    <div class="a11y-row">
+        <label>🔤 Font Size</label>
+        <input type="range" min="90" max="130" value="100" oninput="setFontSize(this.value)">
+    </div>
+    <div class="a11y-row">
+        <label>🌙 High Contrast</label>
+        <input type="checkbox" onchange="toggleContrast(this.checked)">
+    </div>
+    <button class="a11y-reset" onclick="resetA11y()">↺ Reset</button>
+</div>
 <!-- Floating petals -->
 <div class="petals" id="petals"></div>
 
@@ -291,20 +357,19 @@
     <div class="hero-content">
         <div class="profile-wrap fade-up delay-1">
             <div class="profile-ring">
-                <img src="{% static 'images/OJSD7578[1].JPG' %}" alt="Kimberly Jahenda" class="profile-img">
+<img src="{% static 'images/profile.JPG' %}" alt="Kimberly Jahenda" class="profile-img">
             </div>
             <div class="profile-badge">🌸</div>
         </div>
 
         <p class="hero-script fade-up delay-2">hello, I'm</p>
         <h1 class="fade-up delay-2">Kimberly <em>Jahenda</em></h1>
-        <p class="hero-subtitle fade-up delay-3">Frontend Developer · Content Creator · ICT Student</p>
+        <p class="hero-subtitle fade-up delay-3">Frontend Developer · Content Creator · Entrepreneur</p>
 
         <div class="tags fade-up delay-3">
             <span class="tag">✨ Frontend Dev</span>
             <span class="tag">🎥 Content Creator</span>
-            <span class="tag">💻 ICT Student</span>
-            <span class="tag">🌸 Creative</span>
+            <span class="tag">💼 Entrepreneur</span>
         </div>
 
      <div class="social-links fade-up delay-4">
@@ -334,24 +399,21 @@
         <div class="petal-divider">🌸</div>
         <p>Hey! I'm Kimberly, an Information Communication Technology student with a passion for Frontend Development and content creation. I love building beautiful, user-friendly websites and creating engaging content that connects with people. Currently on my journey to becoming a top Frontend Developer — one line of code at a time. 💕</p>
 
-        <div class="about-cards">
-            <div class="about-card">
-                <div class="icon">💻</div>
-                <div class="label">Frontend Dev</div>
-            </div>
-            <div class="about-card">
-                <div class="icon">🎥</div>
-                <div class="label">Content Creator</div>
-            </div>
-            <div class="about-card">
-                <div class="icon">📚</div>
-                <div class="label">ICT Student</div>
-            </div>
-            <div class="about-card">
-                <div class="icon">🌸</div>
-                <div class="label">Creative Soul</div>
-            </div>
-        </div>
+       <div class="about-cards">
+    <a href="https://github.com/Kimberly2710" target="_blank" class="about-card">
+        <div class="icon">💻</div>
+        <div class="label">Frontend Dev</div>
+    </a>
+    <a href="https://www.tiktok.com/@kimberly_jahenda" target="_blank" class="about-card">
+        <div class="icon">🎥</div>
+        <div class="label">Content Creator</div>
+    </a>
+    <a href="https://www.instagram.com/maison_by_kimberly/" target="_blank" class="about-card">
+        <div class="icon">💼</div>
+        <div class="label">Entrepreneur</div>
+    </a>
+</div>
+
     </div>
 </section>
 
@@ -378,6 +440,29 @@
 </footer>
 
 <script>
+
+    function toggleA11y() {
+    document.getElementById('a11yPanel').classList.toggle('open');
+}
+function setBrightness(val) {
+    document.body.style.filter = `brightness(${val}%)`;
+}
+function setFontSize(val) {
+    document.body.style.fontSize = val + '%';
+}
+function toggleContrast(on) {
+    document.body.style.background = on ? '#000' : '';
+    document.body.style.color = on ? '#fff' : '';
+}
+function resetA11y() {
+    document.body.style.filter = '';
+    document.body.style.fontSize = '';
+    document.body.style.background = '';
+    document.body.style.color = '';
+    document.querySelectorAll('.a11y-panel input[type=range]')
+        .forEach(r => r.value = r.defaultValue);
+    document.querySelector('.a11y-panel input[type=checkbox]').checked = false;
+}
     // Generate floating petals
     const petalContainer = document.getElementById('petals');
     const petals = ['🌸', '🌷', '✿', '❀', '🌺'];
@@ -408,6 +493,8 @@
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+    
+
 </script>
 
 {% endblock %}
